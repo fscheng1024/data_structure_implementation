@@ -101,7 +101,8 @@ void LinkedList::print(){
 void LinkedList::addFirst(int value){
     Node *newNode = new Node(value);   
     newNode->next = first;               
-    first = newNode;            
+    first = newNode;    
+    length++;        
 }
 
 
@@ -109,14 +110,14 @@ void LinkedList::addLast(int value){
     Node *newNode = new Node(value);   
     if (isEmpty()) {                     
         first = newNode;
-        return;
+    } else {
+        Node *current = first;
+        while (current->next != nullptr) {         
+            current = current->next;
+        }
+        current->next = newNode;
     }
-
-    Node *current = first;
-    while (current->next != nullptr) {         
-        current = current->next;
-    }
-    current->next = newNode;
+    length++;
 }
 
 
@@ -227,14 +228,14 @@ int LinkedList::getKthFromEnd(int k) {
         current = current->next;
         if(current == nullptr)
             return -1;
-        }
+    }
 
-        Node* fast = current;
-        while(fast->next != nullptr) {
-            fast = fast->next;
-            slow = slow->next;
-        } 
-        return slow->value;
+    Node* fast = current;
+    while(fast->next != nullptr) {
+        fast = fast->next;
+        slow = slow->next;
+    } 
+    return slow->value;
 }
 
 
