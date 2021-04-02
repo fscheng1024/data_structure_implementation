@@ -1,3 +1,4 @@
+package Array;
 
 public class Array {
     private int[] items;
@@ -15,7 +16,7 @@ public class Array {
     public void insertAt(int item, int index) {
         if (index < 0 || index > count)
             throw new IllegalArgumentException();
-        
+
         resizeIfRequired();
 
         for (int i = count - 1; i >= index; i--)
@@ -29,8 +30,8 @@ public class Array {
         if (items.length == count) {
             int[] newItems = new int[count * 2];
 
-        for (int i = 0; i < count; i++)
-            newItems[i] = items[i];
+            for (int i = 0; i < count; i++)
+                newItems[i] = items[i];
 
             items = newItems;
         }

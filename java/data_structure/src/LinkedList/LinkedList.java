@@ -1,3 +1,5 @@
+package LinkedList;
+
 import java.util.NoSuchElementException;
 
 public class LinkedList {
@@ -20,7 +22,7 @@ public class LinkedList {
 
     private Node getPrevious(Node node) {
         var current = first;
-        while(current != null) {
+        while (current != null) {
             if (current.next == node)
                 return current;
             current = current.next;
@@ -33,7 +35,7 @@ public class LinkedList {
         if (isEmpty())
             throw new NoSuchElementException();
 
-        while(current != null) {
+        while (current != null) {
             System.out.print(current.value + " ");
             current = current.next;
         }
@@ -43,7 +45,7 @@ public class LinkedList {
 
     public void addFirst(int value) {
         var node = new Node(value);
-        
+
         if (isEmpty()) {
             first = last = node;
         } else {
@@ -55,8 +57,8 @@ public class LinkedList {
 
     public void addLast(int value) {
         var node = new Node(value);
-        
-        if(isEmpty()) {
+
+        if (isEmpty()) {
             first = last = node;
         } else {
             last.next = node;
@@ -66,25 +68,25 @@ public class LinkedList {
     }
 
     public void deleteFirst() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new NoSuchElementException();
-        }  
-        if (first == last) 
+        }
+        if (first == last)
             first = last = null;
-        
+
         else {
             var second = first.next;
             first.next = null;
             first = second;
         }
-        size--; 
+        size--;
     }
 
     public void deleteLast() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             throw new NoSuchElementException();
-        }  
-        if (first == last) 
+        }
+        if (first == last)
             first = last = null;
         else {
             var previous = getPrevious(last);
@@ -102,7 +104,7 @@ public class LinkedList {
         int count = 0;
         var current = first;
 
-        while(current != null) {
+        while (current != null) {
             if (current.value == value) {
                 return count;
             }
@@ -111,16 +113,16 @@ public class LinkedList {
         }
         return -1;
     }
-    
+
     public int size() {
         return size;
     }
- 
+
     public int[] toArray() {
         int[] array = new int[size];
         var current = first;
         var index = 0;
-        while(current != null) {
+        while (current != null) {
             array[index++] = current.value;
             current = current.next;
         }
@@ -128,16 +130,16 @@ public class LinkedList {
     }
 
     public void reverse() {
-        if(isEmpty()) {
+        if (isEmpty()) {
             return;
-        }  
+        }
         var previous = first;
         var current = first.next;
-        while(current != null) {
+        while (current != null) {
             var next = current.next;
             current.next = previous;
             previous = current;
-            current = next; 
+            current = next;
         }
         last = first;
         first.next = null;
@@ -145,22 +147,22 @@ public class LinkedList {
     }
 
     public int getKthFromEnd(int k) {
-        if(isEmpty())
+        if (isEmpty())
             throw new IllegalArgumentException();
-             
+
         var slow = first;
         var current = first;
-        for(int i=0; i<k-1; i++){
+        for (int i = 0; i < k - 1; i++) {
             current = current.next;
-            if(current == null)
+            if (current == null)
                 throw new IllegalArgumentException();
         }
 
         var fast = current;
-        while(fast != last) {
+        while (fast != last) {
             fast = fast.next;
             slow = slow.next;
-        } 
+        }
         return slow.value;
     }
 }
