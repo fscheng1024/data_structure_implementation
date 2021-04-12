@@ -1,13 +1,13 @@
 #include <string>
 
-const int nums_of_bracket = 4;
+const int kElementsOfBracket = 4;
 int indexOfChar(char* arr, char ch);
 char* stringToCharArray(std::string str);
 
 class Expression {
 private:
-    char leftBrackets[nums_of_bracket] = { '(', '{', '[', '<' };
-    char rightBrackets[nums_of_bracket] = { ')', '}', ']', '>' };
+    char leftBrackets[kElementsOfBracket] = { '(', '{', '[', '<' };
+    char rightBrackets[kElementsOfBracket] = { ')', '}', ']', '>' };
 
     bool isLeftBracket(char ch);
     bool isRightBracket(char ch);

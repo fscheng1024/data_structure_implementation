@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
     Expression exp;
-    string str = "()";
+    string str = "[{()}]";
     bool result = exp.isBalanced(str);
     printf(result ? "true\n" : "false\n");
 
