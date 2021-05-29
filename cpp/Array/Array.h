@@ -7,7 +7,7 @@ class Array {
         bool isEmpty();
 
     public:
-        Array() { items = new int[count](); }
+        Array() { items = new int[count]; }
         void insert(int item);
         void insertAt(int item, int index);
         void remove();
