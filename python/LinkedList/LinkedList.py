@@ -4,6 +4,7 @@ class Node:
         self.value = value
         self.next = None
     
+    
 class SingleLinkedList:
     def __init__(self):
         #super().__init__()
@@ -44,7 +45,7 @@ class SingleLinkedList:
     def print_out(self):
         current = self.head
         while current:
-            print(current.value, end = ' ')
+            print(current.value, end = " ")
             current = current.next
         print(" ")
         
@@ -158,25 +159,3 @@ class SingleLinkedList:
         
         return slow.value
             
-        
-        
-list = SingleLinkedList()
-list.add_first(1)
-list.add_last(2)
-list.add_last(3)
-list.add_last(4)
-list.add_last(5)
-
-list.print_out()
-print(list.indexOf(2))
-
-list.delete_first()
-list.print_out()
-
-list.delete_last()
-list.print_out()
-
-list.reverse()
-list.print_out()
-
-print(list.get_kth_from_end(2))
