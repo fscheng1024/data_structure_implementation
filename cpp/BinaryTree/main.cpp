@@ -11,12 +11,11 @@ int main() {
     tree->insert(8); 
     tree->insert(10);
 
-    //tree->levelOrderTraversal();
-    //tree->preOrderTraversal();
-    //tree->inOrderTraversal();
+    tree->levelOrderTraversal();
+    tree->preOrderTraversal();
+    tree->inOrderTraversal();
     tree->postOrderTraversal();
     
-
     BinaryTree* tree2 = new BinaryTree();
     tree2->insert(7);
     tree2->insert(4); 
@@ -24,7 +23,7 @@ int main() {
     tree2->insert(1); 
     tree2->insert(6); 
     tree2->insert(8); 
-    tree2->insert(11);
+    tree2->insert(10);
     
     std::cout << std::boolalpha << tree->find(10) << std::endl;
     std::cout << std::boolalpha << tree->find(11) << std::endl;

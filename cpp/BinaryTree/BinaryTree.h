@@ -5,6 +5,7 @@
 #include <vector>
 
 class TreeNode {
+    friend class BinaryTree;
 private:
     int value;
     TreeNode* left;
@@ -13,12 +14,11 @@ private:
 public:
     TreeNode() : value(0), left(nullptr), right(nullptr) {};
     TreeNode(int a) : value(a), left(nullptr), right(nullptr) {};
-
-    friend class BinaryTree;
 };
 
 
 class BinaryTree {
+    
 private:
     TreeNode* root;
     bool isLeaf(TreeNode* root);
@@ -42,6 +42,8 @@ public:
     bool equals(BinaryTree* other);
     bool isValidBST();
     std::vector<int>* getNodesAtKDist(int k);
+
+    friend class Traversal;
 
 };
 

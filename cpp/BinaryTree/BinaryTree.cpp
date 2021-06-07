@@ -14,6 +14,7 @@ void BinaryTree::insert(int value) {
         root = new TreeNode(value);
         return;
     }
+
     TreeNode* current = root;
     while (true) {
         if (value < current->value) {
@@ -47,6 +48,7 @@ bool BinaryTree::find(int value) {
 }
 
 
+// == height ==
 int BinaryTree::height() {
     return BinaryTree::heightHelper(root);
 }
@@ -58,6 +60,7 @@ int BinaryTree::heightHelper(TreeNode* root) {
 }
 
 
+// == min ==
 int BinaryTree::min() {
     // return minBSTHelper(root);
     return minHelper(root);
@@ -85,6 +88,7 @@ int BinaryTree::minHelper(TreeNode* root) {
 }
 
 
+// == Traversal ==
 void BinaryTree::levelOrderTraversal() {  
     std::vector<int> result;
     if (!root) return;
@@ -96,7 +100,7 @@ void BinaryTree::levelOrderTraversal() {
         }
     }
     for (int i = 0; i < result.size(); ++i) {
-        std::cout << result.at(i) << " ";
+        std::cout << result[i] << " ";
     }
     std::cout << "\n";
 }
@@ -119,7 +123,7 @@ void BinaryTree::preOrderTraversal() {
     }
 
     for (int i = 0; i < result.size(); ++i) {
-        std::cout << result.at(i) << " ";
+        std::cout << result[i] << " ";
     }
     std::cout << "\n";
 }
@@ -130,7 +134,7 @@ void BinaryTree::inOrderTraversal() {
     if (!root) return;
 
     std::stack<TreeNode *> todo;
-    TreeNode *current = root;
+    TreeNode* current = root;
     while (current || !todo.empty()) {
         while (current) {
             todo.push(current);
@@ -143,7 +147,7 @@ void BinaryTree::inOrderTraversal() {
     }
 
     for (int i = 0; i < result.size(); ++i) {
-        std::cout << result.at(i) << " ";
+        std::cout << result[i] << " ";
     }
     std::cout << "\n";
 }
@@ -172,13 +176,14 @@ void BinaryTree::postOrderTraversal() {
     }
 
     for (int i = 0; i < result.size(); ++i) {
-        std::cout << result.at(i) << " ";
+        std::cout << result[i] << " ";
     }
     std::cout << "\n";
 
 }
 
 
+// == equals ==
 bool BinaryTree::equals(BinaryTree* other) {
     if (!other) return false;
     return equalsHelper(root, other->root);
@@ -196,6 +201,7 @@ bool BinaryTree::equalsHelper(TreeNode* root1, TreeNode* root2) {
 }
 
 
+// == isValidBST ==
 bool BinaryTree::isValidBST() {
     if (!root) return true;
 
@@ -213,6 +219,7 @@ bool BinaryTree::isValidBSTHelper(TreeNode* root, int min_val, int max_val) {
 }
 
 
+// == getNodesAtKDist ==
 std::vector<int>* BinaryTree::getNodesAtKDist(int distance) {
     std::vector<int>* result = new std::vector<int>;
     getNodesAtKDistHelper(root, distance, result);
