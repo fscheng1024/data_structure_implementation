@@ -89,9 +89,8 @@ class DynamicArray:
 
 
 if __name__ == '__main__':
-    # Instantiate 
     arr = DynamicArray() 
-    # Append new element 
+    
     arr.insert(1) 
     arr.insert(2) 
     arr.insert(3) 
