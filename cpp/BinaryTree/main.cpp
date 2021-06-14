@@ -21,7 +21,7 @@ int main() {
     //tree->levelOrderTraversal();
 
     int value = 6;
-    std::vector<TreeNode *>* ancestors = tree->getAncestors(value);
+    std::vector<int>* ancestors = tree->getAncestors(value);
     cout << "ancestors: ";
     for (int i = 0; i < ancestors->size(); ++i) {
         std::cout << ancestors->at(i) << " ";

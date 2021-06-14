@@ -23,7 +23,8 @@ void BinaryTree::insert(int value) {
                 break;
             }
             current = current->left;
-        } else {
+        }
+        else {
             if (!current->right) {
                 current->right = node;
                 break;
@@ -36,12 +37,14 @@ void BinaryTree::insert(int value) {
 
 bool BinaryTree::find(int value) {
     TreeNode* current = root;
-    while(current) {
+    while (current) {
         if (value < current->value) {
             current = current->left;
-        } else if (value > current->value) {
+        }
+        else if (value > current->value) {
             current = current->right;
-        } else
+        }
+        else
             return true;
     }
     return false;
@@ -56,7 +59,7 @@ bool BinaryTree::containsHelper(TreeNode* root, int value) {
     if (!root) return false;
     if (root->value == value) return true;
 
-    return containsHelper(root->left, value) || containsHelper(root->right, value); 
+    return containsHelper(root->left, value) || containsHelper(root->right, value);
 }
 
 
@@ -81,7 +84,7 @@ int BinaryTree::countLeaves() {
 int BinaryTree::countLeavesHelper(TreeNode* root) {
     if (!root) return 0;
     if (isLeaf(root)) return 1;
-    
+
     return countLeavesHelper(root->left) + countLeavesHelper(root->right);
 }
 
@@ -142,9 +145,9 @@ std::vector<int> BinaryTree::levelorder(TreeNode* root) {
     std::vector<int> result;
     if (!root) return result;
 
-    for (int i=0 ; i <= height(); i++) {
+    for (int i = 0; i <= height(); i++) {
         std::vector<int>* tmp = getNodesAtKDist(i);
-        for (int i=0; i<tmp->size(); i++) {
+        for (int i = 0; i < tmp->size(); i++) {
             result.push_back(tmp->at(i));
         }
     }
@@ -152,7 +155,7 @@ std::vector<int> BinaryTree::levelorder(TreeNode* root) {
     return result;
 }
 
-void BinaryTree::levelOrderTraversal() {  
+void BinaryTree::levelOrderTraversal() {
     std::vector<int> result = levelorder(root);
     for (int i = 0; i < result.size(); ++i) {
         std::cout << result[i] << " ";
@@ -167,15 +170,15 @@ std::vector<int> BinaryTree::preorder(TreeNode* root) {
     if (!root) return result;
 
     TreeNode* current = root;
-    std::stack<TreeNode *> todo;
+    std::stack<TreeNode*> todo;
     todo.push(current);
     while (!todo.empty()) {
         TreeNode* node = todo.top();
         todo.pop();
         result.push_back(node->value);
-        if (node->right) 
+        if (node->right)
             todo.push(node->right);
-        if (node->left) 
+        if (node->left)
             todo.push(node->left);
     }
     return result;
@@ -196,7 +199,7 @@ std::vector<int> BinaryTree::inorder(TreeNode* root) {
     std::vector<int> result;
     if (!root) return result;
 
-    std::stack<TreeNode *> todo;
+    std::stack<TreeNode*> todo;
     TreeNode* current = root;
     while (current || !todo.empty()) {
         while (current) {
@@ -206,7 +209,7 @@ std::vector<int> BinaryTree::inorder(TreeNode* root) {
         TreeNode* node = todo.top();
         todo.pop();
         result.push_back(node->value);
-        current = node->right; 
+        current = node->right;
     }
     return result;
 }
@@ -224,7 +227,7 @@ std::vector<int> BinaryTree::postorder(TreeNode* root) {
     std::vector<int> result;
     if (!root) return result;
 
-    std::stack<TreeNode *> todo;
+    std::stack<TreeNode*> todo;
 
     TreeNode* node = root;
     todo.push(node);
@@ -287,8 +290,8 @@ bool BinaryTree::isValidBSTHelper(TreeNode* root, int min_val, int max_val) {
 
     if ((root->value < min_val) || (root->value > max_val)) return false;
 
-    return isValidBSTHelper(root->left, min_val, root->value - 1) 
-            && isValidBSTHelper(root->right, root->value + 1, max_val);
+    return isValidBSTHelper(root->left, min_val, root->value - 1)
+        && isValidBSTHelper(root->right, root->value + 1, max_val);
 }
 
 
@@ -308,8 +311,8 @@ void BinaryTree::getNodesAtKDistHelper(TreeNode* root, int distance, std::vector
         result->push_back(root->value);
         return;
     }
-    getNodesAtKDistHelper(root->left, distance-1, result);
-    getNodesAtKDistHelper(root->right, distance-1, result);
+    getNodesAtKDistHelper(root->left, distance - 1, result);
+    getNodesAtKDistHelper(root->right, distance - 1, result);
 }
 
 bool BinaryTree::areSiblings(int first, int second) {
@@ -321,13 +324,13 @@ bool BinaryTree::areSiblingsHelper(TreeNode* root, int first, int second) {
 
     bool areSibling = false;
     if (root->right && root->right) {
-        areSibling = (root->left->value == first && root->right->value == second) || 
-                    (root->left->value == second && root->right->value == first);
+        areSibling = (root->left->value == first && root->right->value == second) ||
+            (root->left->value == second && root->right->value == first);
     }
 
-    return areSibling || 
-            areSiblingsHelper(root->left, first, second) || 
-            areSiblingsHelper(root->right, first, second);
+    return areSibling ||
+        areSiblingsHelper(root->left, first, second) ||
+        areSiblingsHelper(root->right, first, second);
 }
 
 
@@ -341,7 +344,7 @@ std::vector<int>* BinaryTree::getAncestors(int value) {
 bool BinaryTree::getAncestorsHelper(TreeNode* root, int value, std::vector<int>* result) {
     if (!root) return false;
     if (root->value == value) return true;
-    if (getAncestorsHelper(root->left, value, result) || 
+    if (getAncestorsHelper(root->left, value, result) ||
         getAncestorsHelper(root->right, value, result)) {
         result->push_back(root->value);
         return true;
@@ -352,15 +355,15 @@ bool BinaryTree::getAncestorsHelper(TreeNode* root, int value, std::vector<int>*
 std::vector<int>* BinaryTree::getSuccessorPredecessor(int value) {
     std::vector<int>* result = new std::vector<int>;
     getSuccessorPredecessorHelper(root, nullptr, nullptr, value, result);
-    
+
     return result;
 }
 
 void BinaryTree::getSuccessorPredecessorHelper(
-    TreeNode* root, TreeNode* predecessor, TreeNode* successor, 
+    TreeNode* root, TreeNode* predecessor, TreeNode* successor,
     int value, std::vector<int>* result) {
     if (!root) return;
-    
+
     if (root->value == value) {
         if (root->left) {
             TreeNode* node = root->left;
@@ -379,12 +382,12 @@ void BinaryTree::getSuccessorPredecessorHelper(
             result->push_back(successor->value);
         }
         return;
-    } 
+    }
     if (root->value > value) {
         successor = root;
         result->push_back(successor->value);
         getSuccessorPredecessorHelper(root->left, predecessor, successor, value, result);
-    } 
+    }
     else if (root->value < value) {
         predecessor = root;
         result->push_back(predecessor->value);
@@ -393,14 +396,14 @@ void BinaryTree::getSuccessorPredecessorHelper(
 }
 
 TreeNode* BinaryTree::moveRootTo(TreeNode* root, int value) {
-    if(!root) return nullptr;
-	else if(root->value == value) return root;
-	else if(root->value < value) return moveRootTo(root->right, value);
-	else return moveRootTo(root->left, value);
+    if (!root) return nullptr;
+    else if (root->value == value) return root;
+    else if (root->value < value) return moveRootTo(root->right, value);
+    else return moveRootTo(root->left, value);
 }
 
 
-TreeNode* BinaryTree::getLeftMost(TreeNode *current){
+TreeNode* BinaryTree::getLeftMost(TreeNode* current) {
     while (current->left) {
         current = current->left;
     }
@@ -412,36 +415,36 @@ int BinaryTree::getSuccessor(int value) {
     return successor->value;
 }
 
-TreeNode* BinaryTree::getSuccessorHelper(TreeNode* root, int value){
-	// Search the Node - O(h)
-	TreeNode* current = moveRootTo(root, value);
-	if (!current) return nullptr;
+TreeNode* BinaryTree::getSuccessorHelper(TreeNode* root, int value) {
+    // Search the Node - O(h)
+    TreeNode* current = moveRootTo(root, value);
+    if (!current) return nullptr;
 
     //Case 1: Node has right subtree
-	if (current->right) {  
-		return getLeftMost(current->right); // O(h)
-	}
+    if (current->right) {
+        return getLeftMost(current->right); // O(h)
+    }
     //Case 2: No right subtree  - O(h)
-	else {   
-		TreeNode* successor = nullptr;
-		TreeNode* ancestor = root;
-		while(ancestor != current) {
-			if(current->value < ancestor->value) {
-				successor = ancestor; // so far this is the deepest node for which current node is in left
-				ancestor = ancestor->left;
-			}
-			else
-				ancestor = ancestor->right;
-		}
-        if(!successor) {
+    else {
+        TreeNode* successor = nullptr;
+        TreeNode* ancestor = root;
+        while (ancestor != current) {
+            if (current->value < ancestor->value) {
+                successor = ancestor; // so far this is the deepest node for which current node is in left
+                ancestor = ancestor->left;
+            }
+            else
+                ancestor = ancestor->right;
+        }
+        if (!successor) {
             std::cout << "No successor Found\n";
             return nullptr;
         }
-		return successor;
-	}
+        return successor;
+    }
 }
 
-TreeNode* BinaryTree::getRightMost(TreeNode *current){
+TreeNode* BinaryTree::getRightMost(TreeNode* current) {
     while (current->right) {
         current = current->right;
     }
@@ -453,36 +456,36 @@ int BinaryTree::getPredecessor(int value) {
     return predecessor->value;
 }
 
-TreeNode* BinaryTree::getPredecessorHelper(TreeNode* root, int value){
-	// Search the Node - O(h)
-	TreeNode* current = moveRootTo(root, value);
-	if (!current) return nullptr;
+TreeNode* BinaryTree::getPredecessorHelper(TreeNode* root, int value) {
+    // Search the Node - O(h)
+    TreeNode* current = moveRootTo(root, value);
+    if (!current) return nullptr;
 
     //Case 1: Node has left subtree
-	if (current->left) {  
-		return getRightMost(current->left); // O(h)
-	}
-    
+    if (current->left) {
+        return getRightMost(current->left); // O(h)
+    }
+
     //Case 2: No left subtree  - O(h)
-	else {   
-		TreeNode* predecessor = nullptr;
-		TreeNode* ancestor = root;
-		while(ancestor != current) {
-			if(current->value < ancestor->value) {
-				//predecessor = ancestor; // so far this is the deepest node for which current node is in left
-				ancestor = ancestor->left;
-			}
-			else {
-                predecessor = ancestor;
-				ancestor = ancestor->right;
+    else {
+        TreeNode* predecessor = nullptr;
+        TreeNode* ancestor = root;
+        while (ancestor != current) {
+            if (current->value < ancestor->value) {
+                //predecessor = ancestor; // so far this is the deepest node for which current node is in left
+                ancestor = ancestor->left;
             }
-		}
-        if(!predecessor) {
+            else {
+                predecessor = ancestor;
+                ancestor = ancestor->right;
+            }
+        }
+        if (!predecessor) {
             std::cout << "No predecessor Found\n";
             return nullptr;
         }
-		return predecessor;
-	}
+        return predecessor;
+    }
 }
 
 void BinaryTree::deleteNode(int value) {
@@ -491,36 +494,36 @@ void BinaryTree::deleteNode(int value) {
 
 
 TreeNode* BinaryTree::deleteNodeHelper(TreeNode* root, int value) {
-	if(root == NULL) return root; 
-	else if(value < root->value) 
-        root->left = deleteNodeHelper(root->left,value);
-	else if (value > root->value) 
-        root->right = deleteNodeHelper(root->right,value);
+    if (root == NULL) return root;
+    else if (value < root->value)
+        root->left = deleteNodeHelper(root->left, value);
+    else if (value > root->value)
+        root->right = deleteNodeHelper(root->right, value);
 
-	else {
-		// Case 1:  No child
-		if(isLeaf(root)) { 
-			delete root;
-			root = NULL;
-		}
-		//Case 2: One child 
-		else if(root->left == NULL) {
-			TreeNode *temp = root;
-			root = root->right;
-			delete temp;
-		}
-		else if(root->right == NULL) {
-			TreeNode *temp = root;
-			root = root->left;
-			delete temp;
-		}
-		// case 3: 2 children
-		else { 
-			TreeNode *temp = getLeftMost(root->right);
-			root->value = temp->value;
-			root->right = deleteNodeHelper(root->right, temp->value);
-		}
-	}
-	return root;
+    else {
+        // Case 1:  No child
+        if (isLeaf(root)) {
+            delete root;
+            root = NULL;
+        }
+        //Case 2: One child 
+        else if (root->left == NULL) {
+            TreeNode* temp = root;
+            root = root->right;
+            delete temp;
+        }
+        else if (root->right == NULL) {
+            TreeNode* temp = root;
+            root = root->left;
+            delete temp;
+        }
+        // case 3: 2 children
+        else {
+            TreeNode* temp = getLeftMost(root->right);
+            root->value = temp->value;
+            root->right = deleteNodeHelper(root->right, temp->value);
+        }
+    }
+    return root;
 
 }
