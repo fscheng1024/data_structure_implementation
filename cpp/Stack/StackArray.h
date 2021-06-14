@@ -8,6 +8,7 @@ class StackArray {
         bool isEmpty();
 
     public:
+        StackArray() {};
         StackArray(int length): count(0) { items = new int[length]; }
         void print();
         void push(int item);
