@@ -43,7 +43,7 @@ int main() {
 
     std::vector<int>* result = new std::vector<int>;
     result = tree->getNodesAtKDist(2);
-
+    std::cout << "At dist 2: ";
     for (int i = 0; i < result->size(); ++i) {
         std::cout << result->at(i) << " ";
     }

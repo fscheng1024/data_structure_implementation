@@ -21,6 +21,7 @@ class BinaryTree {
     
 private:
     TreeNode* root;
+    
     bool isLeaf(TreeNode* root);
     bool containsHelper(TreeNode* root, int value);
     int heightHelper(TreeNode* root);

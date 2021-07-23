@@ -2,6 +2,11 @@
 #include <stack>
 #include "BinaryTree.h"
 
+void printVec(std::vector<int> input) {
+    for (int i=0; i<input.size(); ++i)
+        std::cout << input[i] << " ";
+    std::cout << "\n";
+}
 
 bool BinaryTree::isLeaf(TreeNode* root) {
     return root->left == nullptr && root->right == nullptr;
@@ -34,7 +39,7 @@ void BinaryTree::insert(int value) {
     }
 }
 
-
+// == find ==
 bool BinaryTree::find(int value) {
     TreeNode* current = root;
     while (current) {
@@ -50,7 +55,7 @@ bool BinaryTree::find(int value) {
     return false;
 }
 
-
+// == contains ==
 bool BinaryTree::contains(int value) {
     return containsHelper(root, value);
 }
@@ -106,7 +111,6 @@ int BinaryTree::min() {
     return minHelper(root);
 }
 
-
 int BinaryTree::minBSTHelper(TreeNode* root) {
     if (!root) return -1;
 
@@ -117,6 +121,16 @@ int BinaryTree::minBSTHelper(TreeNode* root) {
     return current->value;
 }
 
+int BinaryTree::minHelper(TreeNode* root) {
+    if (isLeaf(root)) return root->value;
+
+    int left = minHelper(root->left);
+    int right = minHelper(root->right);
+
+    return std::min(std::min(left, right), root->value);
+}
+
+// == max ==
 int BinaryTree::max() {
     return maxHelper(root);
 }
@@ -128,15 +142,6 @@ int BinaryTree::maxHelper(TreeNode* root) {
     int right = maxHelper(root->right);
 
     return std::max(std::max(left, right), root->value);
-}
-
-int BinaryTree::minHelper(TreeNode* root) {
-    if (isLeaf(root)) return root->value;
-
-    int left = minHelper(root->left);
-    int right = minHelper(root->right);
-
-    return std::min(std::min(left, right), root->value);
 }
 
 
@@ -157,10 +162,7 @@ std::vector<int> BinaryTree::levelorder(TreeNode* root) {
 
 void BinaryTree::levelOrderTraversal() {
     std::vector<int> result = levelorder(root);
-    for (int i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << " ";
-    }
-    std::cout << "\n";
+    printVec(result);
 }
 
 
@@ -186,12 +188,8 @@ std::vector<int> BinaryTree::preorder(TreeNode* root) {
 
 
 void BinaryTree::preOrderTraversal() {
-
     std::vector<int> result = preorder(root);
-    for (int i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << " ";
-    }
-    std::cout << "\n";
+    printVec(result);
 }
 
 // == In-order Traversal ==
@@ -216,10 +214,7 @@ std::vector<int> BinaryTree::inorder(TreeNode* root) {
 
 void BinaryTree::inOrderTraversal() {
     std::vector<int> result = inorder(root);
-    for (int i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << " ";
-    }
-    std::cout << "\n";
+    printVec(result);
 }
 
 // == Post-order Traversal ==
@@ -251,18 +246,14 @@ std::vector<int> BinaryTree::postorder(TreeNode* root) {
 
 void BinaryTree::postOrderTraversal() {
     std::vector<int> result = postorder(root);
-    for (int i = 0; i < result.size(); ++i) {
-        std::cout << result[i] << " ";
-    }
-    std::cout << "\n";
-
+    printVec(result);
 }
 
 
 // == equals ==
-bool BinaryTree::equals(BinaryTree* other) {
-    if (!other) return false;
-    return equalsHelper(root, other->root);
+bool BinaryTree::equals(BinaryTree* otherTree) {
+    if (!otherTree) return false;
+    return equalsHelper(root, otherTree->root);
 }
 
 
@@ -284,7 +275,6 @@ bool BinaryTree::isValidBST() {
     return isValidBSTHelper(root, INT_MIN, INT_MIN);
 }
 
-
 bool BinaryTree::isValidBSTHelper(TreeNode* root, int min_val, int max_val) {
     if (!root) return true;
 
@@ -303,7 +293,8 @@ std::vector<int>* BinaryTree::getNodesAtKDist(int distance) {
 }
 
 
-void BinaryTree::getNodesAtKDistHelper(TreeNode* root, int distance, std::vector<int>* result) {
+void BinaryTree::getNodesAtKDistHelper(
+    TreeNode* root, int distance, std::vector<int>* result) {
     if (!root) return;
     if (distance < 0) return;
 
@@ -315,6 +306,7 @@ void BinaryTree::getNodesAtKDistHelper(TreeNode* root, int distance, std::vector
     getNodesAtKDistHelper(root->right, distance - 1, result);
 }
 
+// are siblings ==
 bool BinaryTree::areSiblings(int first, int second) {
     return areSiblingsHelper(root, first, second);
 }
@@ -323,7 +315,7 @@ bool BinaryTree::areSiblingsHelper(TreeNode* root, int first, int second) {
     if (!root) return false;
 
     bool areSibling = false;
-    if (root->right && root->right) {
+    if (root->left && root->right) {
         areSibling = (root->left->value == first && root->right->value == second) ||
             (root->left->value == second && root->right->value == first);
     }
