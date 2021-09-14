@@ -10,7 +10,7 @@ HashMap::HashMap(int size) {
     table = new list<KeyValuePair>[size];
 }
 
-void HashMap::insertItem(int key, string value) {
+void HashMap::put(int key, string value) {
     int index = hashFunction(key);
     list<KeyValuePair>::iterator it;
 
@@ -35,7 +35,7 @@ string HashMap::get(int key) {
     return "null";
 }
 
-void HashMap::deleteItem(int key) {
+void HashMap::remove(int key) {
     int index = hashFunction(key);
     if (table[index].empty()) throw invalid_argument("empty");;
 
@@ -57,6 +57,41 @@ void HashMap::printHashMap() {
             cout << " --> " << it->key << ": " << it->value;
         }
         cout << endl;
+    }
+    cout << endl;
+}
+
+// implement with linear probing
+HashTable::HashTable(int size) {
+    this->size = size;
+    table = new KeyValuePair[size];
+}
+
+int HashTable::hashFunction(int key) {
+    return (key % size);
+}
+
+void HashTable::put(int key, string value) {
+    int index = hashFunction(key);
+    KeyValuePair item(key, value);
+    table[index] = item;
+}
+
+string HashTable::get(int key) {
+    
+}
+
+void HashTable::remove(int key) {
+
+}
+
+int HashTable::getSize() {
+
+}
+
+void HashTable::printHashMap() {
+    for (int i = 0; i < size; i++) {
+        cout << i << " --> " << table[i].key << ": " << table[i].value << endl;
     }
     cout << endl;
 }

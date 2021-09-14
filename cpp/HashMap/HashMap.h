@@ -8,11 +8,11 @@ using namespace std;
 
 
 class KeyValuePair {
-private:
-    int key;
-    string value;
 
 public:
+    int key;
+    string value;
+    KeyValuePair() {};
     KeyValuePair(int key, string value) : key(key), value(value) {};
 
     friend class HashMap;
@@ -22,16 +22,34 @@ public:
 class HashMap {
 private:
     int size;
-
     list<KeyValuePair>* table;
+    int hashFunction(int x);
 
 public:
     HashMap(int size); 
     void printHashMap();
 
-    void insertItem(int key, string value);
-    void deleteItem(int key);
+    void put(int key, string value);
+    void remove(int key);
     string get(int key);
-    int hashFunction(int x);
 
+};
+
+
+class HashTable {
+private:
+    KeyValuePair* table;
+    int size;
+    int hashFunction(int x);
+    int getIndex(int key);
+
+    
+public:
+    HashTable(int size); 
+    void printHashMap();
+
+    void put(int key, string value);
+    void remove(int key);
+    string get(int key);
+    int getSize();
 };
