@@ -3,20 +3,21 @@
 
 class LinkedList {
 private:
-    int length;
-    Node* first;
-    int size();
+    int _size;
+    Node* head;
+    int getSize();
     bool isEmpty();
     bool isSingle();
     bool contains(int value);
     Node* getPrevious(Node* node);
 
 public:
-    LinkedList() : first(nullptr) {};
+    LinkedList() : head(nullptr) {};
     void print();
     int indexOf(int value);
     void addFirst(int value);
     void addLast(int value);
+    void addAt(int index, int value);
     void deleteFirst();
     void deleteLast();
     void deleteAt(int index);
