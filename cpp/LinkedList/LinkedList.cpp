@@ -163,19 +163,16 @@ void LinkedList::reverse() {
     if (isEmpty() || isSingle())
         return;
 
-    Node* previous = 0;
     Node* current = head;
-    Node* preceding = head->next;
-
-    while (preceding != 0) {
-        current->next = previous;
-        previous = current;
-        current = preceding;
-        preceding = preceding->next;
+    Node* prev = nullptr;
+    Node* next = nullptr;
+    while (current) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
     }
-
-    current->next = previous;
-    head = current;
+    head = prev;
 }
 
 int LinkedList::getKthFromEnd(int k) {
@@ -197,16 +194,29 @@ int LinkedList::getKthFromEnd(int k) {
     return slow->value;
 }
 
+Node* LinkedList::swapPairs(Node* head) {
+    Node *dummy = new Node(-1), *pre = dummy;
+    dummy->next = head;
+    while (pre->next && pre->next->next) {
+        Node *t = pre->next->next;
+        pre->next->next = t->next;
+        t->next = pre->next;
+        pre->next = t;
+        pre = t->next;
+    }
+    return dummy->next;
+}
+
 int main() {
 
     LinkedList list;
-    list.print(); // print: empty
+    list.print();
     list.addLast(5);
     list.addLast(3);
     list.addFirst(9);
-    list.print(); // print: 9 5 3
+    list.print();
     list.addLast(4);
-    list.print(); // print: 9 5 3 4
+    list.print();
 
     cout << "From last 2: " << list.getKthFromEnd(2) << endl;
     list.deleteAt(2);
@@ -216,15 +226,15 @@ int main() {
     list.print();
 
     list.deleteFirst();
-    list.print(); // print: 5 4
+    list.print();
 
     list.deleteLast();
-    list.print(); // print: 5
+    list.print();
 
     list.addFirst(8);
-    list.print();   // print: 8 5
-    list.reverse(); //
-    list.print();   // print: 5 8
+    list.print();
+    list.reverse();
+    list.print();
 
     list.deleteValue(10);
     list.print();

@@ -25,4 +25,5 @@ public:
     void clear();
     void reverse();
     int getKthFromEnd(int k);
+    Node* swapPairs(Node* head);
 };
