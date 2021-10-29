@@ -195,17 +195,21 @@ int LinkedList::getKthFromEnd(int k) {
 }
 
 Node* LinkedList::swapPairs(Node* head) {
-    Node *dummy = new Node(-1), *pre = dummy;
-    dummy->next = head;
-    while (pre->next && pre->next->next) {
-        Node *t = pre->next->next;
-        pre->next->next = t->next;
-        t->next = pre->next;
-        pre->next = t;
-        pre = t->next;
+    if(!head) return NULL;
+    Node* tmp = new Node(0);
+    tmp->next = head;
+    Node* pre = tmp, *cur = head;
+    while(cur && cur->next) {
+        pre->next = cur->next;
+        pre = pre->next;
+        cur->next = pre->next;
+        pre->next = cur;
+        pre = cur;
+        cur = cur->next;
     }
-    return dummy->next;
+    return tmp->next;
 }
+
 
 int main() {
 
