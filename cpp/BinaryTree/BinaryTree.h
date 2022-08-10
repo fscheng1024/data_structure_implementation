@@ -12,8 +12,10 @@ private:
     TreeNode* right;
 
 public:
-    TreeNode() : value(0), left(nullptr), right(nullptr) {};
-    TreeNode(int a) : value(a), left(nullptr), right(nullptr) {};
+    TreeNode(): 
+        value(0), left(nullptr), right(nullptr) {};
+    TreeNode(int x): 
+        value(x), left(nullptr), right(nullptr) {};
 };
 
 

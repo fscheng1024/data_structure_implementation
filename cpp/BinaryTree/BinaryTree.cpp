@@ -8,6 +8,7 @@ void printVec(std::vector<int> input) {
     std::cout << "\n";
 }
 
+
 bool BinaryTree::isLeaf(TreeNode* root) {
     return root->left == nullptr && root->right == nullptr;
 }
@@ -15,15 +16,15 @@ bool BinaryTree::isLeaf(TreeNode* root) {
 
 void BinaryTree::insert(int value) {
     TreeNode* node = new TreeNode(value);
-    if (!root) {
+    if (!root) {                            // if tree is empty
         root = new TreeNode(value);
         return;
     }
 
     TreeNode* current = root;
     while (true) {
-        if (value < current->value) {
-            if (!current->left) {
+        if (value < current->value) {       
+            if (!current->left) {           // current node did not has left child
                 current->left = node;
                 break;
             }
@@ -39,7 +40,7 @@ void BinaryTree::insert(int value) {
     }
 }
 
-// == find ==
+
 bool BinaryTree::find(int value) {
     TreeNode* current = root;
     while (current) {
@@ -49,8 +50,7 @@ bool BinaryTree::find(int value) {
         else if (value > current->value) {
             current = current->right;
         }
-        else
-            return true;
+        return true;
     }
     return false;
 }
@@ -172,7 +172,7 @@ std::vector<int> BinaryTree::preorder(TreeNode* root) {
     if (!root) return result;
 
     TreeNode* current = root;
-    std::stack<TreeNode*> todo;
+    std::stack<TreeNode*> todo;     // create a stack to store visit
     todo.push(current);
     while (!todo.empty()) {
         TreeNode* node = todo.top();
