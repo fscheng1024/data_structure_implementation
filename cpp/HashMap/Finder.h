@@ -4,6 +4,7 @@
 #include <set>
 #include <math.h>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -13,8 +14,8 @@ public:
     Finder();
     ~Finder();
 
-    char findFirstNonRepeatedChar(string str);
-    char findFirstRepeatedChar(string str);
+    char findFirstNonRepeatedChar(const string str);
+    char findFirstRepeatedChar(const string str);
     int mostFrequent(int arr[], int n);
     int countPairsWIthDiffs(int arr[], int n, int diff);
     vector<int> twoSum(vector<int>& nums, int target);

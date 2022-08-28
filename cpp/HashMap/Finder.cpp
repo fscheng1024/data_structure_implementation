@@ -5,7 +5,7 @@ Finder::Finder() {}
 Finder::~Finder() {}
 
 
-char Finder::findFirstNonRepeatedChar(string str) {
+char Finder::findFirstNonRepeatedChar(const string str) {
     map<char, int> result;
 
     for (int i = 0; i < str.length(); ++i) {
@@ -24,7 +24,7 @@ char Finder::findFirstNonRepeatedChar(string str) {
 }
 
 
-char Finder::findFirstRepeatedChar(string str) {
+char Finder::findFirstRepeatedChar(const string str) {
     std::set<char> result;
 
     for (int i = 0; i < str.length(); i++) {
@@ -80,14 +80,11 @@ int Finder::countPairsWIthDiffs(int arr[], int n, int diff) {
 
 
 vector<int> Finder::twoSum(vector<int>& nums, int target) {
-    map<int, int> repeat;
-    
-    for(int i = 0; i < nums.size(); ++i){
-        if(repeat.count(target - nums[i])){
-            return {repeat[target - nums[i]], i};
-        }
-        repeat[nums[i]] = i;
+    unordered_map<int, int> result;
+    for (int i = 0; i < nums.size(); i++) {
+        if (result.count(nums[i])) 
+            return {result[target - nums[i]], i};
+        result[target - nums[i]] = i;
     }
-    
-    return {nums.size(), nums.size()};;
+    return {};
 }
