@@ -41,13 +41,15 @@ int AVLTree::getHeight() {
 
 
 bool AVLTree::isLeftHeavy(AVLNode* root) {
-    std:: cout << "isLeftHeavy" << endl;
+    std::cout << "isLeftHeavy" << std::endl;
+
     return balanceFactor(root) > 1;
 }
 
 
 bool AVLTree::isRightHeavy(AVLNode* root) {
-    std:: cout << "isRightHeavy" << endl;
+    std::cout << "isRightHeavy" << std::endl;
+
     return balanceFactor(root) < -1;
 }
 
